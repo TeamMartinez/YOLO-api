@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_many :calendar_events
+
 	#The aggregate of all transactions
 	has_many :stock_transactions
 
