@@ -1,10 +1,13 @@
 class CalendarEventsController < ApplicationController
 
+	api :GET, '/calendar_events', 'Get all of the authenticated users Calendar Events'
 	def index
 		@events = @current_user.calendar_events
 		render json: @events
 	end
 
+	api :GET, '/calendar_events/:id', 'Get a specific calendar event'
+	param :id, Integer, 'Id of the Calendar Event' 
 	def show
 		@event = CalendarEvent.find(params[:id])
 		render json: @event

@@ -1,12 +1,13 @@
 class StockTransactionsController < ApplicationController
 
-	api :GET, '/stock_transactions', 'Get all stock transactions'
+	api :GET, '/stock_transactions', 'Get all of the authenticated users Stock Transactions'
 	def index
 		@stocks = @current_user.stock_transactions
 		render json: @stocks
 	end
 
-	api :GET, '/stock_transactions', 'Get a specific stock transaction'
+	api :GET, '/stock_transactions/:id', 'Get a specific stock transaction'
+	param :id, Integer, 'The id of the Stock Transaction'
 	def show
 		@stock = StockTransaction.find(params[:id])
 		render json: @stock
