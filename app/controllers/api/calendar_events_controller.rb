@@ -21,7 +21,9 @@ class Api::CalendarEventsController < ApplicationController
 		param :end_time, DateTime, 'End Time of the Event'
 	end 
 	def create
-		@current_user.create_calendar_event(calendar_event_params)
+		if @current_usercalendar_events.create(calendar_event_params)
+			render json: @current_user.calendar_events
+		end
 	end
 
 	private

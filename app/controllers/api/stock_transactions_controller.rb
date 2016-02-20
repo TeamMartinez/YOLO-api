@@ -21,7 +21,9 @@ class Api::StockTransactionsController < ApplicationController
     param :market_value, Float, 'The transaction amount'
   end
   def create
-    @current_user.create_stock_transaction(stock_transaction_params)
+    if @current_user.stock_transactions.create(stock_transaction_params)
+      render json: @current_user.stock_transactions
+    end
   end
 
   api :DELETE, '/stock_transactions', 'Destroy all stock transaction records for authenticated user'
