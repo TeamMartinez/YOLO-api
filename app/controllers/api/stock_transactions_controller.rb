@@ -26,6 +26,19 @@ class Api::StockTransactionsController < ApplicationController
     end
   end
 
+  api :GET, '/stock_transactions/download', 'Download the authenticated user\'s transaction history'
+  def download
+    #get all of the users transactions
+    @transactions = @current_user.stock_transactions
+
+    #open up a file in /public/stock_history and write 
+    file_path = "public/stock_history/user_" + @current_user.id.to_s + "_history.txt"
+    download_history(file_path)
+
+    #return the location of the file (do not actually send the entire file back)
+    render json: {location: file_path}
+  end
+
   api :DELETE, '/stock_transactions', 'Destroy all stock transaction records for authenticated user'
   def destroy
     @transactions = @current_user.stock_transactions
@@ -39,5 +52,13 @@ class Api::StockTransactionsController < ApplicationController
   private
   def stock_transaction_params
     params.require(:stock_transaction).permit(:abbreviation, :name, :market_value)
+  end
+
+  def download_history(file_path)
+    open(file_path, 'w') do |f|
+      @transactions.each do |transaction|
+        f << transaction.write_line
+      end
+    end
   end
 end

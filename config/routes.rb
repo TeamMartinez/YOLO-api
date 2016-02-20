@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   apipie
 
   namespace :api do
+  	get 'stock_transactions/download' => 'stock_transactions#download'
 	  # define a singular resource to destroy all of the stock_transactions
 	  resource :stock_transactions, only: [:destroy]  	
 	  resources :stock_transactions, only: [:index, :show, :create]
