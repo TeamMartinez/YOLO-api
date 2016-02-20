@@ -24,6 +24,16 @@ class Api::StockTransactionsController < ApplicationController
     @current_user.create_stock_transaction(stock_transaction_params)
   end
 
+  api :DELETE, '/stock_transactions', 'Destroy all stock transaction records for authenticated user'
+  def destroy
+    @transactions = @current_user.stock_transactions
+    if @transactions.destroy_all
+      render json: @transactions
+    else
+      render json: @transactions.errors
+    end
+  end
+
   private
   def stock_transaction_params
     params.require(:stock_transaction).permit(:abbreviation, :name, :market_value)
