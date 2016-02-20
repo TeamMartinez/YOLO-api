@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210174814) do
+ActiveRecord::Schema.define(version: 20160220174739) do
 
   create_table "calendar_events", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20160210174814) do
     t.string   "location"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stock_notes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "stock_abbreviation"
+    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
