@@ -1,6 +1,6 @@
-class StockSummariesController < ApplicationController
+class Api::StockSummariesController < ApplicationController
 
-	api :GET, '/stock_summary', 'Get overall and stock-specific profit totals for user'
+	api :GET, '/stock_summaries', 'Get overall and stock-specific profit totals for user'
 	def index
 		# get all of the transactions associated with the user
 		@transactions = @current_user.stock_transactions

@@ -1,4 +1,4 @@
-class StockTransactionsController < ApplicationController
+class Api::StockTransactionsController < ApplicationController
 
   api :GET, '/stock_transactions', 'Get all of the authenticated users Stock Transactions'
   def index

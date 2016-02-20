@@ -1,4 +1,4 @@
-class CalendarEventsController < ApplicationController
+class Api::CalendarEventsController < ApplicationController
 
 	api :GET, '/calendar_events', 'Get all of the authenticated users Calendar Events'
 	def index
