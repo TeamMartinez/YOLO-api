@@ -33,10 +33,14 @@ class Api::CalendarEventsController < ApplicationController
 		calendar_event_id = params[:calendar_event_id]
 		@calendar_event = CalendarEvent.find(calendar_event_id)
 
-    # kinda hacky for now
+    # create /public/calendar_events if DNE
     create_download_dir
     
-    file_path = "public/calendar_events/event_" + calendar_event_id.to_s + ".txt"
+    # file name composed of SecureRandom base 64 web safe string
+    secure_string = SecureRandom.base64
+    file_path = "public/calendar_events/event_" + secure_string + ".txt"
+
+    # write the contents of the calendar event to the file
     download_event(file_path)
 
     # return the location of the recently created file

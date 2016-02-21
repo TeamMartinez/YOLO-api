@@ -31,10 +31,12 @@ class Api::StockTransactionsController < ApplicationController
     #get all of the users transactions
     @transactions = @current_user.stock_transactions
 
+    # create /public/stock_transactions if DNE
     create_download_dir
 
-    #open up a file in /public/stock_history and write 
-    file_path = "public/stock_history/user_" + @current_user.id.to_s + "_history.txt"
+    # file name composed of SecureRandom base 64 web safe string
+    secure_string = SecureRandom.base64
+    file_path = "public/stock_history/history_" + secure_string + ".txt"
     download_history(file_path)
 
     #return the location of the file (do not actually send the entire file back)
