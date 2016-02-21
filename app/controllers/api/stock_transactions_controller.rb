@@ -31,6 +31,8 @@ class Api::StockTransactionsController < ApplicationController
     #get all of the users transactions
     @transactions = @current_user.stock_transactions
 
+    create_download_dir
+
     #open up a file in /public/stock_history and write 
     file_path = "public/stock_history/user_" + @current_user.id.to_s + "_history.txt"
     download_history(file_path)
@@ -52,6 +54,10 @@ class Api::StockTransactionsController < ApplicationController
   private
   def stock_transaction_params
     params.require(:stock_transaction).permit(:abbreviation, :name, :market_value)
+  end
+
+  def create_download_dir
+    Dir.mkdir('public/stock_history') unless File.exists?('public/stock_history')
   end
 
   def download_history(file_path)

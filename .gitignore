@@ -15,3 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+public/calendar_events
+public/stock_history

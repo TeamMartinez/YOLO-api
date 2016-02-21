@@ -33,6 +33,9 @@ class Api::CalendarEventsController < ApplicationController
 		calendar_event_id = params[:calendar_event_id]
 		@calendar_event = CalendarEvent.find(calendar_event_id)
 
+    # kinda hacky for now
+    create_download_dir
+    
     file_path = "public/calendar_events/event_" + calendar_event_id.to_s + ".txt"
     download_event(file_path)
 
@@ -44,6 +47,10 @@ class Api::CalendarEventsController < ApplicationController
 	def calendar_event_params
 		params.require(:calendar_event).permit(:name, :location, :start_time, :end_time)
 	end
+
+  def create_download_dir
+    Dir.mkdir 'public/calendar_events' unless File.exists?('public/calendar_events')
+  end
 
 	# helper to write calendar event to the specified path
 	def download_event(file_path)
