@@ -26,8 +26,29 @@ class Api::CalendarEventsController < ApplicationController
 		end
 	end
 
+	api :GET, '/calendar_events/:id/download', 'Download the details of a specific calendar event'
+	param :id, Integer, 'Id of the Calendar Event to download'
+	def download
+		# get the particular calendar event
+		calendar_event_id = params[:calendar_event_id]
+		@calendar_event = CalendarEvent.find(calendar_event_id)
+
+    file_path = "public/calendar_events/event_" + calendar_event_id.to_s + ".txt"
+    download_event(file_path)
+
+    # return the location of the recently created file
+		render json: {location: file_path}
+	end
+
 	private
 	def calendar_event_params
 		params.require(:calendar_event).permit(:name, :location, :start_time, :end_time)
+	end
+
+	# helper to write calendar event to the specified path
+	def download_event(file_path)
+		open(file_path, 'w') do |f|
+			f << @calendar_event.write_line
+		end
 	end
 end
