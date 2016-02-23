@@ -11,4 +11,6 @@ $ rake db:seed
 ```
 
 ## Endpoints
-Go to <hostname>/apipie for endpoint documentation
+Go to <hostname>/apipie for endpoint documentation.
+
+Or, view the latest API spec on [heroku](https://martinez-yolo-api.herokuapp.com/apipie).
