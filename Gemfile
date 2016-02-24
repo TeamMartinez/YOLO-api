@@ -51,3 +51,4 @@ end
 
 
 gem 'apipie-rails'
+gem 'puma'
