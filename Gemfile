@@ -51,4 +51,3 @@ end
 
 
 gem 'apipie-rails'
-gem 'pg'
