@@ -49,6 +49,6 @@ group :development, :test do
   gem 'spring'
 end
 
-
 gem 'apipie-rails'
 gem 'puma'
+gem 'omniauth-github'
