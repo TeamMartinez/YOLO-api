@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   apipie
 
+  # for auth GET: /auth/github
+  get "/auth/:provider/callback" => "sessions#create"
+  get "/signout" => "sessions#destroy"
+
   namespace :api do
   	get 'stock_transactions/download' => 'stock_transactions#download'
 	  # define a singular resource to destroy all of the stock_transactions
