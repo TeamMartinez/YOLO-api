@@ -1,4 +1,5 @@
 Rails.application.configure do
+  OmniAuth.config.full_host = 'http://vm344a.se.rit.edu'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
