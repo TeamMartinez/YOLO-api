@@ -9,13 +9,13 @@ class SessionsController < ApplicationController
     auth = request.env["omniauth.auth"]     
     user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
     session[:user_id] = user.id
-    redirect_to ENV["YOLO_SESSION_REDIRECT_URL"], :notice => "Signed in!"
+    redirect_to "/", :notice => "Signed in!"
   end
 
   # destroy a session
   def destroy
     session[:user_id] = nil
-    redirect_to ENV["YOLO_SESSION_REDIRECT_URL"], :notice => "Signed out!"
+    redirect_to "/", :notice => "Signed out!"
   end
 
   # verify the user is authenticated
