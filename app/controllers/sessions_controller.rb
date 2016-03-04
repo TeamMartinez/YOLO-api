@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
   def verify_auth
     # verify authentication based on presence of session[:user_id]
     if session[:user_id]
-      render json: {authenticated: true}
+      user = User.find(session[:user_id])
+      render json: {authenticated: true, user: user}
     else
       render json: {authenticated: false}
     end
