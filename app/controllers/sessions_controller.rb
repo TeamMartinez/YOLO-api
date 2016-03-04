@@ -20,9 +20,8 @@ class SessionsController < ApplicationController
 
   # verify the user is authenticated
   def verify_auth
-    # attempt to access the user based on auth["provider"] and auth["uid"]
-    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"])
-    if user
+    # verify authentication based on presence of session[:user_id]
+    if session[:user_id]
       render json: {authenticated: true}
     else
       render json: {authenticated: false}
