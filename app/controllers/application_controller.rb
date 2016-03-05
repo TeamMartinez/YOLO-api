@@ -6,8 +6,14 @@ class ApplicationController < ActionController::Base
   before_action :current_user
 
   def current_user
-    # attempt to set current user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+
+    if ENV["YOLO_BYPASS_AUTH"]
+      # if machine would like to bypass auth, hardcode user 
+      @current_user ||= User.find(1)
+    else
+      # set current user based on session value (validating auth)
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
 
     # if the current user was not set, render unauthorized response to client
     render json: {errors: "Current user was not able to be assigned"},
