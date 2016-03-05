@@ -1,7 +1,10 @@
+# Basic model test for the CalendarEvent model
+
 require 'spec_helper'
 require_relative '../../app/models/calendar_event.rb'
 
 describe CalendarEvent, type: :model do
+   # Determines if a CalendarEvent with arbitrary values (that fit the defined model) is valid
    it "is valid with user_id, name, location, start time, end time, created at, and updated at values" do
       calEvent = CalendarEvent.create!(
          user_id: 1,
