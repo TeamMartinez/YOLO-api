@@ -15,19 +15,13 @@ describe User, type: :model do
 	should have_many(:purchase_transactions)
 	should have_many(:sale_transactions)
 
-
 	end
 end
 
-	
 
-
- #  # create valid user and verify auth
- #  def test_create_with_omniauth
- #  	# make user
- #  	# 
- #  	puts '1'
- #  	test_verify_auth_valid
- #  	puts '2'
- #  end
+describe User, type: :model do
+	# User.create_with_omniauth
+	it 'TODO -- succesfully auths to github for necessary information' do
+	end
+end
 
