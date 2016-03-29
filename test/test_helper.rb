@@ -7,4 +7,15 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+
+  # generate valid auth and use it elsewhere
+  def test_verify_auth_valid
+  end
+
+  # generate invalid auth, 403
+  def test_verify_auth_invalid
+  end
+
+
 end

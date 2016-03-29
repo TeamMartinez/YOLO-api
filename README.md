@@ -39,7 +39,13 @@ Drop database (drop then create / seed to refresh app data)
 $ rake db:drop
 ```
 
-## Serve the application:
+## Test the application
+Run the rspec tests with:
+```
+$ rake spec
+```
+
+## Serve the application
 Serve rails on :3000:
 ```
 $ rails s
