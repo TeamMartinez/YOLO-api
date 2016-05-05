@@ -26,7 +26,16 @@ class Api::StockTransactionsController < ApplicationController
       end
     end
 
-    if @current_user.stock_transactions.create(stock_transaction_params)
+    if params[:type].eq('PurchaseTransaction')
+      @current_user.money -= params[:market_value]
+    else
+      @current_user.money += params[:market_value]
+    end
+
+    # Add a stock transaction to the user
+    @current_user.stock_transactions.build(stock_transaction_params)
+
+    if @current_user.save
       render json: @current_user.stock_transactions
     end
   end
