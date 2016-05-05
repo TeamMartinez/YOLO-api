@@ -14,12 +14,10 @@ class Api::StockTransactionsController < ApplicationController
   end
 
   api :POST, '/stock_transactions', 'Create a new stock transaction'
-  param :stock_transaction, Hash, 'The stock transaction to create' do
-    param :type, String, 'The type of transaction to create (SaleTransaction or PurchaseTransaction)'
-    param :abbreviation, String, 'The NYSE abbreviation for the stock'
-    param :name, String, 'The full name of the stock'
-    param :market_value, Float, 'The transaction amount'
-  end
+  param :type, String, 'The type of transaction to create (SaleTransaction or PurchaseTransaction)'
+  param :abbreviation, String, 'The NYSE abbreviation for the stock'
+  param :name, String, 'The full name of the stock'
+  param :market_value, Float, 'The transaction amount'
   def create
     if @current_user.stock_transactions.create(stock_transaction_params)
       render json: @current_user.stock_transactions
@@ -55,7 +53,7 @@ class Api::StockTransactionsController < ApplicationController
 
   private
   def stock_transaction_params
-    params.require(:stock_transaction).permit(:abbreviation, :name, :market_value)
+    params.permit(:abbreviation, :name, :market_value)
   end
 
   def create_download_dir
