@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224171853) do
+ActiveRecord::Schema.define(version: 20160505154257) do
 
   create_table "calendar_events", force: :cascade do |t|
     t.integer  "user_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160224171853) do
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
+    t.float    "money"
   end
 
 end
