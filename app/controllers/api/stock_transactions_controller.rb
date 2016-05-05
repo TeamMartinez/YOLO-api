@@ -19,6 +19,13 @@ class Api::StockTransactionsController < ApplicationController
   param :name, String, 'The full name of the stock'
   param :market_value, Float, 'The transaction amount'
   def create
+    # If the user is attempting to purchase a stock, make sure they have enough money
+    if params[:type].eq('PurchaseTransaction')
+      if @current_user.money - params[:market_value] < 0
+        render json: { errors: "User does not have enough money to purchase stock" }
+      end
+    end
+
     if @current_user.stock_transactions.create(stock_transaction_params)
       render json: @current_user.stock_transactions
     end
