@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :purchase_transactions
   has_many :sale_transactions
 
+  validates_numericality_of :money, greater_than_or_equal_to: 0
+
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth["provider"]

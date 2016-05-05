@@ -19,24 +19,18 @@ class Api::StockTransactionsController < ApplicationController
   param :name, String, 'The full name of the stock'
   param :market_value, Float, 'The transaction amount'
   def create
-    # If the user is attempting to purchase a stock, make sure they have enough money
-    if params[:type].eq('PurchaseTransaction')
-      if @current_user.money - params[:market_value] < 0
-        render json: { errors: "User does not have enough money to purchase stock" }
-      end
-    end
-
-    if params[:type].eq('PurchaseTransaction')
+    if params[:type].eql?('PurchaseTransaction')
       @current_user.money -= params[:market_value]
+      @current_user.purchase_transactions.build(stock_transaction_params)      
     else
       @current_user.money += params[:market_value]
+      @current_user.sale_transactions.build(stock_transaction_params)
     end
-
-    # Add a stock transaction to the user
-    @current_user.stock_transactions.build(stock_transaction_params)
 
     if @current_user.save
       render json: @current_user.stock_transactions
+    else
+      render json: { errors: @current_user.errors }
     end
   end
 
@@ -69,7 +63,7 @@ class Api::StockTransactionsController < ApplicationController
 
   private
   def stock_transaction_params
-    params.permit(:abbreviation, :name, :market_value)
+    params.permit(:type, :abbreviation, :name, :market_value)
   end
 
   def create_download_dir
