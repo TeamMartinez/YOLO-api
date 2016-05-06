@@ -32,10 +32,9 @@ ActiveRecord::Schema.define(version: 20160505154257) do
   end
 
   create_table "stock_transactions", force: :cascade do |t|
-    t.string   "type"
     t.integer  "user_id"
-    t.string   "abbreviation"
-    t.string   "name"
+    t.string   "ticker"
+    t.integer  "amount"
     t.float    "market_value"
     t.datetime "created_at"
     t.datetime "updated_at"
