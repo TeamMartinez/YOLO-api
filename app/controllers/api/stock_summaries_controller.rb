@@ -1,5 +1,6 @@
 class Api::StockSummariesController < ApplicationController
 
+  # TODO: maybe remove
   def index
     # get all of the transactions associated with the user
     @transactions = @current_user.stock_transactions

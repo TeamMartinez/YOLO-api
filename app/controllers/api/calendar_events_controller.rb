@@ -10,7 +10,7 @@ class Api::CalendarEventsController < ApplicationController
     render json: @event
   end
 
-  def delete
+  def destroy
     if CalendarEvent.destroy(params[:id])
       render json: @current_user.calendar_events
     end

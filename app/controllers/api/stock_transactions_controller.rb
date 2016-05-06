@@ -5,24 +5,25 @@ class Api::StockTransactionsController < ApplicationController
     render json: @stocks
   end
 
-  def show
-    @stock = StockTransaction.find(params[:id])
-    render json: @stock
-  end
-
-  def create
-    if params[:type].eql?('PurchaseTransaction')
-      @current_user.money -= params[:market_value]
-      @current_user.purchase_transactions.build(stock_transaction_params)      
-    else
-      @current_user.money += params[:market_value]
-      @current_user.sale_transactions.build(stock_transaction_params)
-    end
+  def buy
+    difference = params[:market_value] * params[:amount]
+    @current_user.money -= difference
+    @current_user.stock_transactions.create(stock_transaction_params)
 
     if @current_user.save
       render json: @current_user.stock_transactions
-    else
-      render json: { errors: @current_user.errors }
+    end
+  end
+
+  def sell
+    difference = params[:market_value] * params[:amount]
+    @current_user.money += difference
+
+    params[:amount] = -params[:amount]
+    @current_user.stock_transactions.create(stock_transaction_params)
+
+    if @current_user.save
+      render json: @current_user.stock_transactions
     end
   end
 
@@ -42,18 +43,9 @@ class Api::StockTransactionsController < ApplicationController
     render json: {location: file_path}
   end
 
-  def destroy
-    @transactions = @current_user.stock_transactions
-    if @transactions.destroy_all
-      render json: @transactions
-    else
-      render json: @transactions.errors
-    end
-  end
-
   private
   def stock_transaction_params
-    params.permit(:type, :abbreviation, :name, :market_value)
+    params.permit(:ticker, :amount, :market_value)
   end
 
   def create_download_dir

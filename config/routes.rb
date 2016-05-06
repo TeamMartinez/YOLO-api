@@ -7,12 +7,16 @@ Rails.application.routes.draw do
   namespace :api do
     get 'stock_transactions/download' => 'stock_transactions#download'
     # define a singular resource to destroy all of the stock_transactions
-    resource :stock_transactions, only: [:destroy]
-    resources :stock_transactions, only: [:index, :show, :create]
+    resources :stock_transactions, only: [:index]
+    post 'stock_transactions/buy' => 'stock_transactions#buy'
+    post 'stock_transactions/sell' => 'stock_transactions#sell'
+
+    resources :stocks, only: [:index]
+
     resources :calendar_events, only: [:index, :show, :create, :destroy] do
       get 'download' => 'calendar_events#download'
     end
-    resources :stock_summaries, only: [:index]
+
     resources :stock_notes, only: [:index, :create]
   end
 end
