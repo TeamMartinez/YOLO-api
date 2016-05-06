@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     post 'stock_transactions/sell' => 'stock_transactions#sell'
 
     resources :stocks, only: [:index]
-
+    resources :github_issues, only: [:index, :create]
     resources :calendar_events, only: [:index, :show, :create, :destroy] do
       get 'download' => 'calendar_events#download'
     end

@@ -67,3 +67,4 @@ end
 
 gem 'puma'
 gem 'omniauth-github'
+gem 'github_api'
