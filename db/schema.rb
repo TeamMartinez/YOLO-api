@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20160505154257) do
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
-    t.float    "money"
+    t.float    "money",      default: 1000.0
   end
 
 end
