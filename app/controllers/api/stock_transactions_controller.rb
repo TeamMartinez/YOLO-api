@@ -11,7 +11,7 @@ class Api::StockTransactionsController < ApplicationController
     @current_user.stock_transactions.create(stock_transaction_params)
 
     if @current_user.save
-      render json: @current_user.stock_transactions
+      render json: @current_user
     end
   end
 
@@ -23,7 +23,7 @@ class Api::StockTransactionsController < ApplicationController
     @current_user.stock_transactions.create(stock_transaction_params)
 
     if @current_user.save
-      render json: @current_user.stock_transactions
+      render json: @current_user
     end
   end
 
