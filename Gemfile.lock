@@ -37,8 +37,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    apipie-rails (0.3.6)
-      json
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -215,7 +213,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  apipie-rails
   byebug
   capybara
   coffee-rails (~> 4.1.0)

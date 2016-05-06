@@ -1,23 +1,15 @@
 class Api::StockTransactionsController < ApplicationController
 
-  api :GET, '/stock_transactions', 'Get all of the authenticated users Stock Transactions'
   def index
     @stocks = @current_user.stock_transactions
     render json: @stocks
   end
 
-  api :GET, '/stock_transactions/:id', 'Get a specific stock transaction'
-  param :id, Integer, 'The id of the Stock Transaction'
   def show
     @stock = StockTransaction.find(params[:id])
     render json: @stock
   end
 
-  api :POST, '/stock_transactions', 'Create a new stock transaction'
-  param :type, String, 'The type of transaction to create (SaleTransaction or PurchaseTransaction)'
-  param :abbreviation, String, 'The NYSE abbreviation for the stock'
-  param :name, String, 'The full name of the stock'
-  param :market_value, Float, 'The transaction amount'
   def create
     if params[:type].eql?('PurchaseTransaction')
       @current_user.money -= params[:market_value]
@@ -34,7 +26,6 @@ class Api::StockTransactionsController < ApplicationController
     end
   end
 
-  api :GET, '/stock_transactions/download', 'Download the authenticated user\'s transaction history'
   def download
     #get all of the users transactions
     @transactions = @current_user.stock_transactions
@@ -51,7 +42,6 @@ class Api::StockTransactionsController < ApplicationController
     render json: {location: file_path}
   end
 
-  api :DELETE, '/stock_transactions', 'Destroy all stock transaction records for authenticated user'
   def destroy
     @transactions = @current_user.stock_transactions
     if @transactions.destroy_all

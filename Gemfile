@@ -65,6 +65,5 @@ group :development, :test do
   gem 'shoulda'
 end
 
-gem 'apipie-rails'
 gem 'puma'
 gem 'omniauth-github'

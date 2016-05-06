@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  apipie
-
   # for auth GET: /auth/github
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/verify' => 'sessions#verify_auth'

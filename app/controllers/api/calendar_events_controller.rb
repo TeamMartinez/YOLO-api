@@ -1,31 +1,21 @@
 class Api::CalendarEventsController < ApplicationController
 
-  api :GET, '/calendar_events', 'Get all of the authenticated users Calendar Events'
   def index
     @events = @current_user.calendar_events
     render json: @events
   end
 
-  api :GET, '/calendar_events/:id', 'Get a specific calendar event'
-  param :id, Integer, 'Id of the Calendar Event' 
   def show
     @event = CalendarEvent.find(params[:id])
     render json: @event
   end
 
-  api :POST, '/calendar_events', 'Create a new calendar event'
-  param :name, String, 'Name of the Calendar Event'
-  param :location, String, 'Location of the Calendar Event'
-  param :start_time, DateTime, 'Start Time of the Event'
-  param :end_time, DateTime, 'End Time of the Event'
   def create
     if @current_user.calendar_events.create(calendar_event_params)
       render json: @current_user.calendar_events
     end
   end
 
-  api :GET, '/calendar_events/:id/download', 'Download the details of a specific calendar event'
-  param :id, Integer, 'Id of the Calendar Event to download'
   def download
     # get the particular calendar event
     calendar_event_id = params[:calendar_event_id]
