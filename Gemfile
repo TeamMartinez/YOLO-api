@@ -65,6 +65,8 @@ group :development, :test do
   gem 'shoulda'
 end
 
+gem 'mysql2', '~> 0.3.18'
+
 gem 'puma'
 gem 'omniauth-github'
 gem 'github_api'
